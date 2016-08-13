@@ -11,14 +11,27 @@
   </body>
 </html>
 <script>
-	var socket = io.connect('/');
-		socket.on('connect', function() {
-			alert('连接成功');
-	  // 连接成功
+	// var socket = io.connect('/chat', {_query: 'sid=123456'});
+	var socket = io.connect('/chat');
+	socket.on('connect', function() {
+  		// 连接成功
+		console.log('连接成功');
+		socket.emit('message', 'Hello Fucking World!');
+	});
+
+	socket.on('message', function(data) {
+		alert(data);
 	});
 
 	socket.on('disconnect', function(data) {
 	  //连接断开
-	  alert('连接断开');
+	  console.log('连接断开');
+	  socket.on('reconnect', function(data) {
+		// 重新连接成功
+		console.log('重新连接成功');
+	  });
 	});
+
+	
+
 </script>
