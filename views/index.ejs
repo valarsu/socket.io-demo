@@ -3,9 +3,22 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/socket.io/socket.io.js"></script>
   </head>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
   </body>
 </html>
+<script>
+	var socket = io.connect('/');
+		socket.on('connect', function() {
+			alert('连接成功');
+	  // 连接成功
+	});
+
+	socket.on('disconnect', function(data) {
+	  //连接断开
+	  alert('连接断开');
+	});
+</script>
